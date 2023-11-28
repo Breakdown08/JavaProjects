@@ -2,66 +2,60 @@ package com.example.exercises;
 
 import android.widget.Button;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class Ex4_3 extends Exercise
 {
     Button button;
     Ex4_3()
     {
         title = "Четвертое задание 3 часть";
-        hasArguments = true;
-        argumentsHint = "Введите числитель и знаменатель через запятую";
+        hasArguments = false;
+        argumentsHint = "";
     }
 
-    public static class Fraction {
-        private final int numerator;
-        private final int denominator;
-        private final double fractionInDec;
-        private final String stringFraction;
+    public void swapFirstLastWords(File file) throws IOException {
+        StringBuilder content = new StringBuilder();
 
-        public Fraction(int numerator, int denominator) {
-            this.numerator = numerator;
-            this.denominator = denominator;
-            this.fractionInDec = (double) numerator / (double) denominator;
-            this.stringFraction = numerator + "/" + denominator;
+        try (BufferedReader reader = new BufferedReader(new FileReader(file.getPath()))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                content.append(line).append("\n");
+            }
         }
 
-        public String getFractionInDec() {
-            return  "Дробь в десятичном формате: " + fractionInDec;
-        }
+        String[] sentences = content.toString().split("\\.\\s*");
 
-        public String getStringFraction() {
-            return  "Строковое представление дроби: " + stringFraction;
-        }
+        for (int i = 0; i < sentences.length; i++) {
+            String sentence = sentences[i].trim();
+            if (!sentence.isEmpty()) {
+                String[] words = sentence.split("\\s+");
+                if (words.length >= 2) {
+                    String firstWord = words[0];
+                    words[0] = words[words.length - 1];
+                    words[words.length - 1] = firstWord;
 
-        public String getPowFraction(double pow) {
-            return "Результат возведения дроби в степень " + pow
-                    + "\n" + "в десятичном виде: " + Math.pow(fractionInDec, pow)
-                    + "\n" + "в дробном виде: " + (int) Math.pow(numerator, pow) + "/" + (int) Math.pow(denominator, pow);
+                    sentences[i] = String.join(" ", words);
+                }
+            }
         }
+        String result = String.join(". ", sentences);
 
-
-        @Override
-        public String toString() {
-            return "Fraction {" +
-                    "numerator=" + numerator +
-                    ", denominator=" + denominator +
-                    ", fractionInDec=" + fractionInDec +
-                    ", stringFraction='" + stringFraction + '\'' +
-                    '}';
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file.getPath()))) {
+            writer.write(result);
         }
+        MainActivity.Instance.PrintText("Текст в файле с заменой первого и последнего слов в предложении: \n" + result);
     }
 
     @Override
-    public void RunTask()
-    {
-        int numerator = Integer.parseInt(MainActivity.Instance.inputArguments[0]);
-        int denominator = Integer.parseInt(MainActivity.Instance.inputArguments[1]);
-
-        Fraction fraction = new Fraction(numerator, denominator);
-        fraction.getFractionInDec();
-        fraction.getPowFraction(2);
-        MainActivity.Instance.PrintText(fraction.getFractionInDec());
-        MainActivity.Instance.PrintText(fraction.getPowFraction(2));
+    public void RunTask() throws IOException {
+        File file = new File("file.txt");
+        swapFirstLastWords(file);
     }
 }
 

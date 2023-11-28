@@ -4,11 +4,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.io.IOException;
+
 public class Exercise {
     String title;
     String argumentsHint;
     Boolean hasArguments;
-    public void RunTask() { }
+    public void RunTask() throws IOException { }
     public void Init() { }
     public void Run()
     {
@@ -21,7 +23,11 @@ public class Exercise {
         }
         else
         {
-            RunTask();
+            try {
+                RunTask();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 }

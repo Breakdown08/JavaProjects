@@ -23,6 +23,7 @@ import com.example.exercises.databinding.ActivityMainBinding;
 import com.google.android.material.textfield.TextInputEditText;
 
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -69,7 +70,11 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view)
             {
                 inputArguments = textInputEditText.getText().toString().split(argumentsSplitRegex);
-                map.get(spinner.getSelectedItem().toString()).RunTask();
+                try {
+                    map.get(spinner.getSelectedItem().toString()).RunTask();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
                 spinner.setVisibility(View.VISIBLE);
                 runButton.setVisibility(View.VISIBLE);
                 textInputEditText.setVisibility(View.INVISIBLE);
@@ -104,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
         exercises.add(new Ex3_1());
         exercises.add(new Ex3_2());
         exercises.add(new Ex4_1());
-        exercises.add(new Ex4_2());
+        //exercises.add(new Ex4_2());
         exercises.add(new Ex4_3());
     }
 
