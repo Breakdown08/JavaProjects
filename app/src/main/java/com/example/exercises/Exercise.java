@@ -9,9 +9,11 @@ public class Exercise {
     String argumentsHint;
     Boolean hasArguments;
     public void RunTask() { }
-
+    public void Init() { }
     public void Run()
     {
+        MainActivity.Instance.argumentsSplitRegex = MainActivity.Instance.argumentsSplitRegexDefault;
+        Init();
         MainActivity.Instance.textView.setText("");
         if (hasArguments)
         {

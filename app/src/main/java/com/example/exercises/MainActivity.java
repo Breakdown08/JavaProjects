@@ -42,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Exercise> exercises = new ArrayList<Exercise>();
     Map<String, Exercise> map = new HashMap<>();
     String[] inputArguments;
+    String argumentsSplitRegexDefault = ",";
+    String argumentsSplitRegex = argumentsSplitRegexDefault;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view)
             {
-                inputArguments = textInputEditText.getText().toString().split(",");
+                inputArguments = textInputEditText.getText().toString().split(argumentsSplitRegex);
                 map.get(spinner.getSelectedItem().toString()).RunTask();
                 spinner.setVisibility(View.VISIBLE);
                 runButton.setVisibility(View.VISIBLE);
@@ -99,7 +101,11 @@ public class MainActivity extends AppCompatActivity {
     private void SetExercisesList() {
         exercises.add(new Ex1());
         exercises.add(new Ex2());
-        exercises.add(new Ex3());
+        exercises.add(new Ex3_1());
+        exercises.add(new Ex3_2());
+        exercises.add(new Ex4_1());
+        exercises.add(new Ex4_2());
+        exercises.add(new Ex4_3());
     }
 
     public void ActivateUserInput(String hint)
