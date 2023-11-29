@@ -5,6 +5,7 @@ import android.widget.Button;
 import java.lang.reflect.Constructor;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Ex4_2 extends Exercise
@@ -26,7 +27,7 @@ public class Ex4_2 extends Exercise
     @Override
     public void RunTask()
     {
-        String string = MainActivity.Instance.textInputEditText.toString();
+        String string = MainActivity.Instance.textInputEditText.getText().toString();
         String[] sArray1 = MainActivity.Instance.inputArguments;
         MainActivity.Instance.PrintText("Количество слов в тексте: " + sArray1.length);
 
@@ -41,7 +42,7 @@ public class Ex4_2 extends Exercise
                 .map(x -> x.charAt(x.length() - 1))
                 .map(Object::toString)
                 .map(String::toUpperCase)
-                .toList();
+                .collect(Collectors.toList());
 
         StringBuilder result = new StringBuilder();
 

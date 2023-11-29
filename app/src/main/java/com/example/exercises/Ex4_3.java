@@ -5,6 +5,8 @@ import android.widget.Button;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -17,6 +19,17 @@ public class Ex4_3 extends Exercise
         title = "Четвертое задание 3 часть";
         hasArguments = false;
         argumentsHint = "";
+    }
+
+    public String readFromFile(String fileName)
+    {
+        File path = MainActivity.Instance.getApplicationContext().getFilesDir();
+        try {
+            FileOutputStream writer = new FileOutputStream(new File(path, fileName));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return e.toString();
+        }
     }
 
     public void swapFirstLastWords(File file) throws IOException {
