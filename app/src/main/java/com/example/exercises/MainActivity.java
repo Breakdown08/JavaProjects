@@ -110,7 +110,6 @@ public class MainActivity extends AppCompatActivity {
         exercises.add(new Ex3_2());
         exercises.add(new Ex4_1());
         exercises.add(new Ex4_2());
-        //exercises.add(new Ex4_3());
     }
 
     public void ActivateUserInput(String hint)

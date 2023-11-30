@@ -13,7 +13,7 @@ import java.io.IOException;
 
 public class Ex4_3 extends Exercise
 {
-    Button button;
+    /*Button button;
     Ex4_3()
     {
         title = "Четвертое задание 3 часть";
@@ -69,6 +69,6 @@ public class Ex4_3 extends Exercise
     public void RunTask() throws IOException {
         File file = new File("file.txt");
         swapFirstLastWords(file);
-    }
+    }*/
 }
 
